@@ -42,7 +42,14 @@ module chip_top_wrapper
     inout  wire              trstn_pad,
     inout  wire              tms_pad,
     inout  wire              tdi_pad,
-    inout  wire              tdo_pad
+    inout  wire              tdo_pad,
+
+    inout  wire              sck_i_pad, 
+    inout wire               ws_i_pad,  
+    inout wire               sd_i_pad,  
+    inout  wire              sck_o_pad, 
+    inout  wire              ws_o_pad,
+    inout  wire              sd_o_pad
   );
   generate
     // To overcome same module issue, one have to:

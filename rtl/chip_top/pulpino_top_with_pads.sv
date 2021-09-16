@@ -61,7 +61,15 @@ module pulpino_top_with_pads
     inout  wire              trstn_pad,
     inout  wire              tms_pad,
     inout  wire              tdi_pad,
-    inout  wire              tdo_pad
+    inout  wire              tdo_pad,
+
+    inout  wire              sck_i_pad, 
+    inout wire               ws_i_pad,  
+    inout wire               sd_i_pad,  
+    inout  wire              sck_o_pad, 
+    inout  wire              ws_o_pad,
+    inout  wire              sd_o_pad
+   
   );
     // Clock and Reset
     logic              clk /*verilator clocker*/;
@@ -74,6 +82,23 @@ module pulpino_top_with_pads
     logic              fetch_enable_i;
     logic              fetch_enable_pad_OEN_1;
     logic              fetch_enable_pad_I_0;
+
+//########
+    logic              sd_o;
+    logic              sd_o_pad_IE_1;
+    logic              sd_o_pad_I_0;
+    logic              ws_o;
+    logic              ws_o_pad_IE_1;
+    logic              ws_o_pad_I_0;
+    logic              sck_o;
+    logic              sck_o_pad_IE_1;
+    logic              sck_o_pad_I_0;
+    logic              sd_i;
+    logic              sd_i_pad_OEN_0;
+    logic              ws_i;
+    logic              ws_i_pad_OEN_0;
+    logic              sck_i;
+    logic              sck_i_pad_OEN_0;
 
     //SPI Slave
     logic              spi_clk_i /*verilator clocker*/;

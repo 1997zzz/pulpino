@@ -24,13 +24,48 @@ module pulpino_pads
     inout  wire              spi_master_csn3_pad,
     inout  wire              spi_master_miso_pad,
     inout  wire              spi_master_mosi_pad,
-
+    
+    
+    
     inout  wire              scl_pad,
     inout  wire              sda_pad,
 
     inout  wire              uart_tx_pad,
     inout  wire              uart_rx_pad,
-
+    
+    
+    
+  
+  /***************************user logic signals**********************/
+    
+    inout  wire              sck_i_pad,
+    input wire               sck_i,//
+    input wire               sck_i_pad_OEN_0,
+    
+    inout wire               ws_i_pad,
+    input wire               ws_i,//
+    input wire               ws_i_pad_OEN_0,
+    
+    inout wire               sd_i_pad,
+    input wire               sd_i,//
+    input wire               sd_i_pad_OEN_0,
+    
+    inout  wire              sck_o_pad,
+    output wire              sck_o,//
+    input logic              sck_o_pad_IE_1,
+    input logic              sck_o_pad_I_0,
+    
+    inout  wire              ws_o_pad,
+    output wire              ws_o,//
+    input  logic             ws_o_pad_IE_1,
+    input  logic             ws_o_pad_I_0,
+    
+    inout  wire              sd_o_pad,
+    output wire              sd_o,//
+    input logic              sd_o_pad_IE_1,
+    input logic              sd_o_pad_I_0,
+    
+/***************************************************************/
     inout  wire       [20:0] gpio_pad,
 
     inout  wire        [7:0] upio_pad,
@@ -87,6 +122,10 @@ module pulpino_pads
     input  logic              spi_master_miso_pad_OEN_1,
     input  logic              spi_master_miso_pad_I_0,
 
+  
+
+
+
     output logic              scl_pad_i,
     input  logic              scl_pad_o,
     input  logic              scl_pad_IE_1,
@@ -142,7 +181,13 @@ module pulpino_pads
   pad_io_pd  spi_mosi_pad_i         (.PAD(spi_mosi_pad),         .IE(spi_mosi_pad_OEN_1),         .OEN(spi_mosi_pad_OEN_1),         .I(spi_mosi_pad_I_0),         .O(spi_sdi0_i));
 
   // PULPino as master
-  pad_io_pd  spi_master_clk_pad_i   (.PAD(spi_master_clk_pad ),  .IE(spi_master_clk_pad_OEN_0 ),  .OEN(spi_master_clk_pad_OEN_0 ),  .I(spi_master_clk_o ),        .O());
+  pad_io_pd  spi_master_clk_pad_i   
+    ( .PAD(spi_master_clk_pad ),  
+      .IE(spi_master_clk_pad_OEN_0 ),  
+      .OEN(spi_master_clk_pad_OEN_0 ),  
+      .I(spi_master_clk_o ),        
+      .O()
+    );
   pad_io_pd  spi_master_csn0_pad_i  (.PAD(spi_master_csn0_pad),  .IE(spi_master_csn0_pad_OEN_0),  .OEN(spi_master_csn0_pad_OEN_0),  .I(spi_master_csn0_o),        .O());
   pad_io_pd  spi_master_csn1_pad_i  (.PAD(spi_master_csn1_pad),  .IE(spi_master_csn1_pad_OEN_0),  .OEN(spi_master_csn1_pad_OEN_0),  .I(spi_master_csn1_o),        .O());
   pad_io_pd  spi_master_csn2_pad_i  (.PAD(spi_master_csn2_pad),  .IE(spi_master_csn2_pad_OEN_0),  .OEN(spi_master_csn2_pad_OEN_0),  .I(spi_master_csn2_o),        .O());
@@ -174,5 +219,54 @@ module pulpino_pads
   pad_io_pd tms_pad_i               (.PAD(tms_pad),              .IE(tms_pad_OEN_1),       .OEN(tms_pad_OEN_1),           .I(tms_pad_I_0),                 .O(tms_i));
   pad_io_pd tdi_pad_i               (.PAD(tdi_pad),              .IE(tdi_pad_OEN_1),       .OEN(tdi_pad_OEN_1),           .I(tdi_pad_I_0),                 .O(tdi_i));
   pad_io_pd tdo_pad_i               (.PAD(tdo_pad),              .IE(tdo_pad_OEN_0),       .OEN(tdo_pad_OEN_0),           .I(tdo_o),                       .O());
-
+  
+/************************************/
+ /* pad_io_pd    sck_o_pad_i(
+      .PAD(sck_o_pad),              
+      .IE (sck_o_pad_IE_1),               
+      .OEN(sck_o_pad_IE_1),               
+      .I  (sck_o_pad_I_0),              
+      .O  (sck_o)  
+  );
+ 
+  pad_io_pd  sck_i_pad_i   
+    ( .PAD(sck_i_pad ),  
+      .IE(sck_i_pad_OEN_0 ),  
+      .OEN(sck_i_pad_OEN_0 ),  
+      .I(sck_i ),        
+      .O()
+    );
+    
+  pad_io_pd    ws_o_pad_i(
+      .PAD(ws_o_pad),              
+      .IE (ws_o_pad_IE_1),               
+      .OEN(ws_o_pad_IE_1),               
+      .I  (ws_o_pad_I_0),              
+      .O  (ws_o)  
+  );
+ 
+  pad_io_pd  ws_i_pad_i   
+    ( .PAD(ws_i_pad ),  
+      .IE(ws_i_pad_OEN_0 ),  
+      .OEN(ws_i_pad_OEN_0 ),  
+      .I(ws_i ),        
+      .O()
+    );
+    
+  pad_io_pd    sd_o_pad_i(
+      .PAD(sd_o_pad),              
+      .IE (sd_o_pad_IE_1),               
+      .OEN(sd_o_pad_IE_1),               
+      .I  (sd_o_pad_I_0),              
+      .O  (sd_o)  
+  );
+ 
+  pad_io_pd  sd_i_pad_i   
+    ( .PAD(sd_i_pad ),  
+      .IE(sd_i_pad_OEN_0 ),  
+      .OEN(sd_i_pad_OEN_0 ),  
+      .I(sd_i ),        
+      .O()
+    );
+  */
 endmodule

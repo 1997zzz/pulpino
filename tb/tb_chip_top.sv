@@ -69,7 +69,15 @@ module tb_chip_top(input wire s_clk, ExitStatus exit_status_if);
   logic         sda_pad_i;
   logic         sda_pad_o;
   logic         sda_padoen_o;
-
+	
+  //*****************************
+  wire          sck_i;
+  wire          ws_i;  
+  wire          sd_i;  
+  wire          sck_o; 
+  wire          ws_o;
+  wire          sd_o;
+  
   wire          scl_io;
   wire          sda_io;
   pullup(scl_io);
@@ -81,7 +89,7 @@ module tb_chip_top(input wire s_clk, ExitStatus exit_status_if);
   // NOTE:
   // For SMIC110 process, GPIO uses PBSD2 pad that has a pulldown resistor constantly connected to the pad.
   //                      and when gpio_in is Hi-Z, gpio is zero.
-  // For SKY130 process, GPIO use gpiov2 pad, and no pulldown resistor connects to the pad when output is disabled.
+  // For SKY130 process, GPIO use gpiov2 pad, and no pulldown resis/tb/tb_chip_top_i/GPIO_WIDTH /tb/tb_chip_top_i/gpio_in /tb/tb_chip_top_i/gpiotor connects to the pad when output is disabled.
   //                     and when gpio_in is Hi-Z, pad output is disabled, gpio is also Hi-Z.
   //                     And this introduces `X` into the SoC.
   // To avoid `X` in simulation, always attach pulldown resistor to GPIO pads .
@@ -270,7 +278,13 @@ module tb_chip_top(input wire s_clk, ExitStatus exit_status_if);
     .trstn_pad            ( jtag_trstn   ),
     .tms_pad              ( jtag_tms     ),
     .tdi_pad              ( jtag_tdi     ),
-    .tdo_pad              ( jtag_tdo     )
+    .tdo_pad              ( jtag_tdo     ),
+    .sck_i_pad            ( sck_i        ), 
+    .ws_i_pad             ( ws_i         ),  
+    .sd_i_pad             ( sd_i         ),  
+    .sck_o_pad            ( sck_o        ), 
+    .ws_o_pad             ( ws_o         ),
+    .sd_o_pad             ( sd_o         )
   );
 
   logic use_qspi;
@@ -485,7 +499,7 @@ module tb_chip_top(input wire s_clk, ExitStatus exit_status_if);
       #1000ns;
       gpio_in = 'bz;
       test_interrupt_fall(9, GPIO_WIDTH);
-      #1000ns;
+      #1000ns;/tb/tb_chip_top_i/gpio_in /tb/tb_chip_top_i/GPIO_WIDTH
       gpio_in = 'bz;
       test_interrupt_lev0(9, GPIO_WIDTH);
       #1000ns;

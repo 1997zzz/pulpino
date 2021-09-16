@@ -33,9 +33,9 @@ module user_plugin
     assign upio_out_o = {5'b0,sd_o,ws_o,sck_o};
     assign upio_dir_o = {5'b0,1'b1,1'b1,1'b1 };
 
-    assign sck_i = upio_in_i[0];
-    assign ws_i  = upio_in_i[1];
-    assign sd_i  = upio_in_i[2];
+    assign sck_i = upio_in_i[3];
+    assign ws_i  = upio_in_i[4];
+    assign sd_i  = upio_in_i[5];
       
 
     apb_iis apb_iis_up
