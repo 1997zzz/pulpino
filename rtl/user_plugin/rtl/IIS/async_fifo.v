@@ -33,15 +33,32 @@ module async_fifo
 	reg  [addr_width:0]   rd_addr_gray_d2;
 
 	reg  [data_width-1:0] fifo_ram [data_depth-1:0];
+	integer i;
 
 	//write fifo
-	genvar i;
+	/*
+ 	genvar i;
 	generate 
 	for(i=0;i<data_depth;i=i+1)
 	begin: fifo_init
 	always@(posedge wr_clk or negedge rst) begin
 		if(!rst)
 			fifo_ram[i] <= 16'h0;
+		else if(wr_en && (!full))
+			fifo_ram[wr_addr] <= din;
+		else
+			fifo_ram[wr_addr] <= fifo_ram[wr_addr];
+	end
+	end
+	endgenerate
+	*/
+	
+	//write fifo
+	always@(posedge wr_clk or negedge rst) begin
+		if(!rst) begin
+			for(i=0;i<data_depth;i=i+1)
+				fifo_ram[i] <= 16'h0;
+		end
 		else if(wr_en && (!full))
 			fifo_ram[wr_addr] <= din;
 		else
