@@ -94,11 +94,13 @@ module apb_iis(
 	assign pready        = 1'b1;
 	assign pslverr       = 1'b0;
 
+	//git data_depth is 16,but simulation data_depth is 128
+
 	//instant module
 	async_fifo
 	#(
 		.data_width (16),
-		.data_depth (128),
+		.data_depth (16),
 		.addr_width (7)
 	)
 	tx_fifo
@@ -116,7 +118,7 @@ module apb_iis(
 );
 
 	IIS_SEND#(
-		.data_depth(128)
+		.data_depth(16)
 ) 
 	IIS_SEND(
 		.clk_in(pclk),
@@ -133,7 +135,7 @@ module apb_iis(
 );		
 
 	IIS_RECEIVE#(
-		.data_depth(128)
+		.data_depth(16)
 ) 
 	IIS_RECEIVE(
 		.rst(presetn),
@@ -153,7 +155,7 @@ module apb_iis(
 	async_fifo
 	#(
 		.data_width (16),
-		.data_depth (128),
+		.data_depth (16),
 		.addr_width (7)
 	)
 	rx_fifo
