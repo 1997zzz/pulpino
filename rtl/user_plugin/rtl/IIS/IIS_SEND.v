@@ -1,5 +1,5 @@
 module IIS_SEND#(
-	parameter data_depth = 64
+	parameter data_depth = 1024
 )
 (
 	input clk_in, //from apb clk

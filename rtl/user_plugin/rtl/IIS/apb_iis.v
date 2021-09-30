@@ -100,8 +100,8 @@ module apb_iis(
 	async_fifo
 	#(
 		.data_width (16),
-		.data_depth (16),
-		.addr_width (7)
+		.data_depth (1024),
+		.addr_width (10)
 	)
 	tx_fifo
 	(
@@ -118,7 +118,7 @@ module apb_iis(
 );
 
 	IIS_SEND#(
-		.data_depth(16)
+		.data_depth(1024)
 ) 
 	IIS_SEND(
 		.clk_in(pclk),
@@ -135,7 +135,7 @@ module apb_iis(
 );		
 
 	IIS_RECEIVE#(
-		.data_depth(16)
+		.data_depth(1024)
 ) 
 	IIS_RECEIVE(
 		.rst(presetn),
@@ -155,8 +155,8 @@ module apb_iis(
 	async_fifo
 	#(
 		.data_width (16),
-		.data_depth (16),
-		.addr_width (7)
+		.data_depth (1024),
+		.addr_width (10)
 	)
 	rx_fifo
 	(

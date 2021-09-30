@@ -64,8 +64,6 @@ module async_fifo
 		else
 			fifo_ram[wr_addr] <= fifo_ram[wr_addr];
 	end
-	end
-	endgenerate
 	
 	//read fifo
 	always@(posedge rd_clk or negedge rst) begin
